@@ -1,0 +1,46 @@
+<template>
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-size_12-of-12">
+        <thead>
+            
+            <tr class="slds-line-height_reset">
+                <template for:each={_columns} for:item="column">
+                    <th class={column.class} scope="col" key={column.index}>
+                        <div class="slds-truncate" title={column.label}>{column.label}</div>
+                    </th>  
+                </template> 
+            </tr>
+            
+        </thead>
+        <tbody>
+            <template for:each={_data} for:item="line">
+                <tr class="slds-hint-parent" key={line.item}>
+                    <template for:each={line} for:item="linecol">
+                        <td data-label="Account Name" key={linecol.index}>
+                            <template if:false={linecol.withType}>
+                                <div class="slds-truncate" title="Cloudhub">
+                                    <div class="slds-input-has-icon slds-input-has-icon_right">
+                                        <template if:false={linecol.noteditable}>
+                                            <lightning-icon size="x-small" style="opacity:0.6;" class="slds-input__icon" icon-name="utility:edit" alternative-text="Warning!"></lightning-icon>
+                                        </template>
+                                        <input  value={linecol.value} style="border:none;" readonly={linecol.noteditable} placeholder="Placeholder Text" class="slds-input" />
+                                    </div>
+                                </div>
+                            </template>
+                            <template if:true={linecol.withType}>
+                                <template if:true={linecol.picklist}>
+                                    <lightning-combobox
+                                        value={linecol.value} variant="label-hidden"
+                                        placeholder="Select Progress"
+                                        options={linecol.options}
+                                         ></lightning-combobox>
+                                </template>
+                            </template>
+                            
+                        </td>
+                    </template>
+                </tr>
+            </template>
+        </tbody>
+        
+    </table>    
+</template>
