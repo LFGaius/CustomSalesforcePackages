@@ -1,0 +1,7 @@
+.val{
+    color:#58aeff;
+}
+
+.val:hover{
+    text-decoration: underline;
+}

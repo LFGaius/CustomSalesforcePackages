@@ -1,0 +1,167 @@
+<template>
+    <div class="back">
+        <!-- <section class="c-box zone hsection">
+            <lightning-layout class="slds-size_12-of-12">
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Ragiona sociale" value="TEST"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="P.IVA" value="21515"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Insegna" value="TEST"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Inizio Migrzione" value="21515"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12 slds-p-top_medium">
+                    <a href="https://my/path" target="_blank">Legale rappresantante</a>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout class="slds-size_12-of-12">
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view  variant="label-left" label="Cod PV" value="213123122"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Fine" value=""></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+            </lightning-layout>
+        </section> -->
+        
+        <lightning-layout class="c-box">
+            <lightning-layout-item class="info-block">
+                <template if:true={displaying_list1}>
+                    <lightning-layout class="slds-text-heading_small title slds-m-left_x-small">Lista EC</lightning-layout>
+                    <c-jk-lista-e options={listdata1}></c-jk-lista-e>
+                </template>
+                <template if:true={displaying_list2}>
+                    <lightning-layout class="slds-text-heading_small title slds-m-left_x-small">Lista Riepiloghi (Online)</lightning-layout>
+                    <c-jk-lista-riepiloghi options={listdata2}></c-jk-lista-riepiloghi>
+                </template>
+                <template if:true={displaying_detail}>
+                    <lightning-button onclick={onGoBack} variant="base" label="Go back to the list" title="Return to the list" icon-name="utility:chevronleft" ></lightning-button>
+                    <lightning-layout class="slds-text-heading_small slds-m-left_x-small title">Details</lightning-layout>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item class="aside-block">
+                <lightning-layout class="slds-align_absolute-center slds-text-heading_small title">Ricerca EQUENS</lightning-layout>
+                <lightning-layout class="c-box slds-align_absolute-center slds-p-top_x-small slds-m-top_xxx-small slds-m-bottom_small zone">
+                    <lightning-layout-item>
+                        <lightning-layout multiple-rows class="slds-p-bottom_small">
+                            <lightning-layout-item size="6" padding="horizontal-small">
+                                <lightning-input message-toggle-active="" message-toggle-inactive="" type="toggle" label="E/C"></lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" padding="horizontal-small">
+                                <lightning-input message-toggle-active="" message-toggle-inactive="" type="toggle" label="Movimenti"></lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout multiple-rows >
+                            <lightning-layout-item size="6" padding="horizontal-small">
+                                <lightning-input type="date" label="Data DA"></lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item size="6" padding="horizontal-small">
+                                <lightning-input type="date" label="Data A"></lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout class="slds-align_absolute-center slds-p-bottom_small slds-p-top_small slds-m-top_x-small box-base">
+                            <lightning-button label="Annula"  title="Annula" onclick={onAnnula} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button label="Ricerca"  title="Rierca" onclick={onRicerca} class="slds-m-left_x-small"></lightning-button>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!-- <lightning-layout class="slds-align_absolute-center slds-text-heading_small title">Informazioni</lightning-layout> -->
+                <lightning-layout class="c-box zone">
+                    <lightning-layout-item class="slds-m-top_small slds-m-bottom_small">
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <span class="slds-m-top_x-small">Ricerca E/C</span>
+                            <!-- <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Autorizzazioni/Transazioni</a> -->
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Verifica Calcolo Commissioni</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Ritamo Emissione E/C</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Lettene manuali</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Storico movimenti manuali</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Sospesi RID</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Ricerca scadenzali</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Ricerca FC/Mov free</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Incassi/pagamenti</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Ricerca Emittente CDC</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Gestione Pending Pos Si</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Dettaglio Sospesi RID</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Mod temp accedito Pasa 1+1</a>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <!-- <lightning-layout class="slds-align_absolute-center slds-text-heading_small title">Autorizzazioni</lightning-layout> -->
+                <lightning-layout class="c-box zone">
+                    <lightning-layout-item class="slds-m-top_small slds-m-bottom_small">
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Contestazioni</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Archivi Acquiring</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Movimenti</a>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="slds-align_absolute-center slds-text-heading_small title">B.O.</lightning-layout>
+                <lightning-layout class="c-box zone">
+                    <lightning-layout-item class="slds-m-top_small slds-m-bottom_small">
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Sollecito richiesta doc (OnUs)</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Sollecito richiesta (NotOnUs)</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Stampa elenco NotOnUs (Visa / MC)</a>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

@@ -1,0 +1,44 @@
+<template>
+    <lightning-layout class="slds-m-top_small slds-m-bottom_small slds-size_12-of-12">
+        <lightning-layout-item class="slds-size_12-of-12">
+            <template if:true={isLabelLeft}>
+                <div class="header-column">
+                    <p><span class="slds-text-body_small" title="Field 1" style="color: rgb(102, 102, 102);">{label} : </span>{value}</p>
+                </div>
+            </template>
+            <template if:true={isLabelTop}>
+                <div class="header-column">
+                    <p class="slds-text-body_small" title="Field 1" style="color: rgb(63, 63, 63);">{label}</p>
+                    <template if:false={richText}>
+                        <p>{value}</p>
+                    </template>
+                    <template if:true={richText}>
+                        <lightning-formatted-rich-text value={value}></lightning-formatted-rich-text>
+                    </template>
+                    
+                </div>
+            </template>
+            <template if:true={isLabelHidden}>
+                <div class="header-column">
+                    <template if:false={richText}>
+                        <template if:true={truncate}>
+                            <p title={value} class="slds-truncate">{value}</p>
+                        </template>
+                        <template if:false={truncate}>
+                            <p>{value}</p>
+                        </template>
+                    </template>
+                    <template if:true={richText}>
+                        <template if:true={truncate}>
+                            <lightning-formatted-rich-text title={value} class="slds-truncate" value={value}></lightning-formatted-rich-text>
+                        </template>
+                        <template if:false={truncate}>
+                            <lightning-formatted-rich-text value={value}></lightning-formatted-rich-text>
+                        </template>
+                    </template>
+                    
+                </div>
+            </template>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

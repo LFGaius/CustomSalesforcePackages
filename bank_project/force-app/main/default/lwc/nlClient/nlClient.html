@@ -1,0 +1,128 @@
+<template>
+    <div class="back">
+        <section class="c-box zone hsection">
+            <lightning-layout class="slds-size_12-of-12">
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Ragiona sociale" value="TEST"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="P.IVA" value="21515"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Insegna" value="TEST"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Inizio Migrzione" value="21515"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12 slds-p-top_medium">
+                    <a href="https://my/path" target="_blank">Legale rappresantante</a>
+                </lightning-layout-item>
+            </lightning-layout>
+            <lightning-layout class="slds-size_12-of-12">
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view  variant="label-left" label="Cod PV" value="213123122"></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+                <lightning-layout-item class="slds-size_2-of-12">
+                    <c-nl-lwc-custom-field-view class="fielviewbox"  label="Fine" value=""></c-nl-lwc-custom-field-view>
+                </lightning-layout-item>
+            </lightning-layout>
+        </section>
+        
+        <lightning-layout class="c-box">
+            <lightning-layout-item class="slds-size_9-of-12 info-block">
+                <template if:true={displaying_list}>
+                    <lightning-layout class="slds-text-heading_small title slds-m-left_x-small">Lista Autorizzazioni Stratus</lightning-layout>
+                    <c-nl-lwc-datatable onstorno={onStornoAction} onautorizzazioni={onAutorizzazioni} onnumerocarta={onNumeroCarta} options={listdata}></c-nl-lwc-datatable>
+                </template>
+                <template if:true={displaying_detail}>
+                    <lightning-button onclick={onGoBack} variant="base" label="Go back to the list" title="Return to the list" icon-name="utility:chevronleft" ></lightning-button>
+                    <lightning-layout class="slds-text-heading_small slds-m-left_x-small title">Details</lightning-layout>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item class="slds-size_3-of-12">
+                <lightning-layout class="slds-align_absolute-center slds-text-heading_small title">Cerca Autorizzazioni</lightning-layout>
+                <lightning-layout class="c-box slds-align_absolute-center slds-m-top_xxx-small slds-m-bottom_small zone">
+                    <lightning-layout-item>
+                        <lightning-layout >
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-input type="text" label="Carta"></lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-input type="text" label="Codice Eserscente"></lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-input type="text" label="Micro Film"></lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-input type="text" label="Autorizzazione"></lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-input type="date" label="DA"></lightning-input>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-input type="date" label="A"></lightning-input>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout>
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-combobox
+                                    name="progress"
+                                    label="DA ORA"
+                                    value={value}
+                                    options={options}
+                                    onchange={handleChange} ></lightning-combobox>
+                            </lightning-layout-item>
+                            <lightning-layout-item padding="horizontal-small">
+                                <lightning-combobox
+                                    name="progress"
+                                    label="A ORA"
+                                    value={value}
+                                    options={options}
+                                    onchange={handleChange} ></lightning-combobox>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <lightning-layout class="slds-align_absolute-center slds-p-bottom_small slds-p-top_small slds-m-top_x-small" style="background-color: #2a96e8;border-radius:0px 0px 4px 4px;">
+                            <lightning-button label="Annula"  title="Annula" onclick={onAnnula} class="slds-m-left_x-small"></lightning-button>
+                            <lightning-button label="Cerca"  title="Cerca" onclick={onCerca} class="slds-m-left_x-small"></lightning-button>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="slds-align_absolute-center slds-text-heading_small title">Informazioni</lightning-layout>
+                <lightning-layout class="c-box zone">
+                    <lightning-layout-item class="slds-m-top_small slds-m-bottom_small">
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <span class="slds-m-top_x-small">Autorizzazioni/Transazioni</span>
+                            <!-- <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Autorizzazioni/Transazioni</a> -->
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Richiesta storno</a>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+                <lightning-layout class="slds-align_absolute-center slds-text-heading_small title">Autorizzazioni</lightning-layout>
+                <lightning-layout class="c-box zone">
+                    <lightning-layout-item class="slds-m-top_small slds-m-bottom_small">
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Richiesta Autorizzazioni</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Carte dimenticate/ritirate</a>
+                        </lightning-layout>
+                        <lightning-layout >
+                            <lightning-icon class="help-icon" icon-name="utility:info_alt"></lightning-icon>
+                            <a href="https://my/path" class="slds-m-top_x-small linkblock" target="_blank">Premi esercenti</a>
+                        </lightning-layout>
+                    </lightning-layout-item>
+                </lightning-layout>
+            </lightning-layout-item>
+        </lightning-layout>
+    </div>
+</template>

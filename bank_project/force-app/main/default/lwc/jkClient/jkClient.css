@@ -1,0 +1,60 @@
+
+.c-box{
+    margin: 10px 10px 10px 10px;
+    /* border:solid rgba(0, 0, 0, 0.2) 1px; */
+    border-radius: 4px;
+} 
+
+.box-base{
+    background-color: rgb(87, 181, 253);
+    border-radius:0px 0px 4px 4px;
+}
+
+.box-base lightning-button{
+    box-shadow: 0px 5px 0px 1px #37a3fb;
+}
+
+.info-block{
+    background-color: white;
+    margin-top: 30px;
+    border-radius: 5px;
+    height: 595px;
+    padding-top: 10px;
+    width: 80%;
+}
+
+a{
+    color:#5caefb;
+}
+
+.aside-block{
+    width: 20%;
+
+}
+
+.back{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color:#c4e3ff;
+}
+
+.title{
+    font-weight:bold;
+}
+
+.help-icon{
+    transform: scale(0.6, 0.6);
+}
+
+.zone{
+    background-color: white;
+    border:none;
+    /* box-shadow: 0px 5px 0px 0px rgb(79, 129, 176); */
+    /* color:#eeefff; */
+}
+
+/* .linkblock{
+    color:#eeefff;
+} */
+
+
