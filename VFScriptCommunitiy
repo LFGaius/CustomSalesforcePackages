@@ -1,0 +1,38 @@
+<apex:page showHeader="false">
+    <style>
+        body{
+            display:none;
+        }
+    </style>
+    <script>
+    debugger
+    let ids="";
+    const selectElement=function(){
+         ids="";
+         parent.document.querySelectorAll('.selected a[data-recordid]').forEach(e=>{debugger
+            ids+='-'+e.dataset.recordid;
+         })
+         console.log(JSON.stringify(ids));
+                                                                                    alert(ids);
+         //parent.location.replace("https://devwr-open-fiber.cs89.force.com/OFAreeCD/s/prova?ids="+ids.substring(1));
+     };
+    const addActionButton=function(){ 
+        let li = document.createElement("li");
+        let button = document.createElement("button");
+        button.innerHTML = "Prova";
+        button.className += " slds-button ";
+        button.className += " slds-button--neutral";
+        //button.setAttribute("onclick", selectElement);
+        button.onclick= selectElement;
+        li.appendChild(button);
+        parent.document.querySelector('.branding-actions').innerHTML="";
+        parent.document.querySelector('.branding-actions').appendChild(li);
+        //parent.document.querySelector('.branding-actions').innerHTML=parent.document.querySelector('.branding-actions').innerHTML+'<li onclick="t" class="test slds-button slds-button--neutral" data-aura-rendered-by="845:0"><!--render facet: 839:0--><a href="javascript:void(0);" title="Test" data-aura-rendered-by="853:0" class="forceActionLink" data-aura-class="forceActionLink" role="button"><div title="Test" data-aura-rendered-by="854:0">Test</div></a></li>';
+    };
+    
+    
+    setTimeout(addActionButton,  1000);
+    
+    //document.querySelector('button').addEventListener('click',selectElement)
+    </script>
+</apex:page>
