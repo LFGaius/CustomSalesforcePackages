@@ -5,19 +5,27 @@
             <div class="slds-combobox_container">
                 <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click slds-is-open" aria-expanded="true" aria-haspopup="listbox" role="combobox">
                     <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
-                        <input type="text" class="slds-input slds-combobox__input" onclick={onClickInput} value={labelSelected}  id="combobox-id-3" aria-controls="listbox-id-4" autocomplete="off" role="textbox" placeholder="Select an Option…" readonly="" />
+                        <!-- <input type="text" class={inputClass} onclick={onClickInput} value={labelSelected}  id="combobox-id-3" aria-controls="listbox-id-4" autocomplete="off" role="textbox" placeholder={placeholder} readonly="" /> -->
+                        <button type="button" class={boxValueClass} onclick={onClickInput}  aria-labelledby="combobox-label-id-139 combobox-id-11-selected-value" id="combobox-id-11-selected-value" aria-controls="listbox-id-3" aria-expanded="true" aria-haspopup="listbox">
+                            <lightning-layout vertical-align="center" class="slds-size_12-of-12">
+                                <lightning-layout-item size="12">
+                                    <span class="slds-truncate" if:false={valueSelected}>Select an Option…</span>
+                                    <span class="slds-truncate" if:true={valueSelected}>{valueSelected}</span>
+                                </lightning-layout-item>
+                            </lightning-layout>
+                            
+                        </button>
                         <span class="slds-icon_container slds-icon-utility-down slds-input__icon slds-input__icon_right">
                             <svg class="slds-icon slds-icon slds-icon_x-small slds-icon-text-default" aria-hidden="true">
                                 <use xlink:href="/_slds/icons/utility-sprite/svg/symbols.svg#down"></use>
                             </svg>
                         </span>
                     </div>
-                    <div if:true={optionsVisible} class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid" role="listbox">
+                    <div if:true={optionsVisible} class="slds-dropdown slds-dropdown_length-5" role="listbox">
                         <ul class="slds-listbox slds-listbox_vertical" role="presentation">
                             <template for:each={options} for:item="option">
                                     <li key={option.value} role="presentation" class="slds-listbox__item" >
                                         <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option" onclick={onSelectOption} data-id={option.value}>
-                                            <span class="slds-media__figure slds-listbox__option-icon"></span>
                                             <span class="slds-media__body">
                                                 <span class="slds-truncate">{option.label}</span>
                                             </span>
