@@ -1,5 +1,14 @@
-input{
+button{
     height: 38px;
     border-radius: 5px;
     border: none;
+    
+}
+
+.slds-combobox{
+    width: 100%;
+}
+
+button.dark{
+    background: #F7F6F6;
 }
