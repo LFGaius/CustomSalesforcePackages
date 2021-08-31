@@ -9,7 +9,7 @@
                         <button type="button" class={boxValueClass} onclick={onClickInput}  aria-labelledby="combobox-label-id-139 combobox-id-11-selected-value" id="combobox-id-11-selected-value" aria-controls="listbox-id-3" aria-expanded="true" aria-haspopup="listbox">
                             <lightning-layout vertical-align="center" class="slds-size_12-of-12">
                                 <lightning-layout-item size="12">
-                                    <span class="slds-truncate" if:false={valueSelected}>Select an Option…</span>
+                                    <span class="slds-truncate" if:false={valueSelected}>{placeholder}</span>
                                     <span class="slds-truncate" if:true={valueSelected}>{valueSelected}</span>
                                 </lightning-layout-item>
                             </lightning-layout>
