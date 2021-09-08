@@ -1,0 +1,201 @@
+Lontsi, [08.09.21 00:37]
+<apex:page controller="processoSocialReportisticaVfPController" contentType="application/vnd.ms-excel#exelmozfile.xls">
+    {!xlheader}
+
+    <Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+        xmlns:html="https://www.w3.org/TR/html401/">
+        <Styles>
+            <Style ss:ID="Default" ss:Name="Normal">
+                <Alignment ss:Vertical="Bottom"/><Borders/><Font ss:bgcolor="#FF0000"/>
+                <Interior ss:bgcolor="#FF0000"/><NumberFormat/><Protection/>
+            </Style>
+            <Style ss:ID="sh1" >
+                <Alignment ss:Vertical="Center" ss:Horizontal="Center" ss:WrapText="1"/>
+                <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+            </Style>
+            <Style ss:ID="srow" >
+                <Alignment ss:Vertical="Center"  ss:WrapText="1"/>
+                <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+            </Style>
+            <Style ss:ID="s16">
+                <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1" ss:Italic="1"/>
+                <Interior ss:Color="#92D050" ss:Pattern="Solid"/>
+            </Style>
+
+            <Style ss:ID="s23">
+                <Font x:Family="Swiss" ss:Bold="0" ss:bgcolor="#FF0000"/>
+            </Style>
+
+            <Style ss:ID="s66">
+                <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="16" ss:Color="#000000" ss:Bold="1" ss:Italic="1"/>
+            </Style>
+            <Style ss:ID="shgreen1" >
+                <Alignment ss:Vertical="Center" ss:Horizontal="Center" ss:WrapText="1"/>
+                <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1"/>
+                <Interior ss:Color="#92D050" ss:Pattern="Solid"/>
+                <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+            </Style>
+            <Style ss:ID="shblue1" >
+                <Alignment ss:Vertical="Center" ss:Horizontal="Center" ss:WrapText="1"/>
+                <Font ss:FontName="Calibri" x:Family="Swiss" ss:Size="11" ss:Color="#FFFFFF" ss:Bold="1"/>
+                <Interior ss:Color="#2308B9" ss:Pattern="Solid"/>
+                <Borders>
+                   <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+                   <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+                </Borders>
+            </Style>
+
+        </Styles>
+        <style type="text/css">
+            
+
+            #cell1 {
+                background-color: #92D050;
+                color: white;
+            }
+
+Lontsi, [08.09.21 00:37]
+</style>
+        <Worksheet ss:Name="Report social" >
+            
+            <Table>
+                <Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="105" ss:Span="9" />
+                <Row  ss:Height="50" >
+                    <Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">Data</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">Nuovi Case Entrati</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">Case totali chius</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">BACKLOG TOTALE</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shgreen1">
+                        <Data ss:Type="String">IN LAVORAZIONE totale</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shgreen1">
+                        <Data ss:Type="String">IN           LAVORAZIONE agenzia</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shgreen1">
+                        <Data ss:Type="String">IN LAVORAZIONE creation</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shgreen1">
+                        <Data ss:Type="String">IN LAVORAZIONE delivery</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shgreen1">
+                        <Data ss:Type="String">IN LAVORAZIONE assurance</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shgreen1">
+                        <Data ss:Type="String">IN LAVORAZIONE      altri</Data>
+                    </Cell>
+               </Row>
+
+               <!-- apex reapeat start -->
+             
+               <apex:repeat value="{!datas1}" var="element">
+                <Row ss:Height="20" > 
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">
+                            <apex:outputText value="{0,date,yyyy / MM / dd}">
+                                <apex:param value="{! element.d }" />
+                            </apex:outputText>
+                            
+                        </Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">{!element.nSocial}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">{!element.cSocial}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">{!element.bSocial}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">{!element.iT}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow" >
+                        <Data ss:Type="String">{!element.iA}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow" >
+                        <Data ss:Type="String">{!element.iC}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow" >
+                        <Data ss:Type="String">{!element.iD}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow" >
+                        <Data ss:Type="String">{!element.iAs}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow" >
+                        <Data ss:Type="String">{!element.iAl}</Data>
+                    </Cell>
+                </Row>
+                </apex:repeat>
+           
+                <!-- apex reapeat end -->
+            </Table>
+        </Worksheet>
+        <Worksheet ss:Name="Dettaglio secondi livelli">
+            <Table>
+                <Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="105" ss:Span="9" />
+                <Row  ss:Height="50" >
+                    <Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">Data</Data>
+                    </Cell>
+
+Lontsi, [08.09.21 00:37]
+<Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">Nuovi Case Entrati</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">Case totali chius</Data>
+                    </Cell>
+                    <Cell ss:StyleID="shblue1">
+                        <Data ss:Type="String">BACKLOG TOTALE</Data>
+                    </Cell>
+
+                </Row>
+                <apex:repeat value="{!datas1}" var="element">
+                <Row ss:Height="20" > 
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">
+                            <apex:outputText value="{0,date,yyyy / MM / dd}">
+                                <apex:param value="{! element.d }" />
+                            </apex:outputText>
+                        </Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">{!element.nSecondi}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">{!element.cSecondi}</Data>
+                    </Cell>
+                    <Cell ss:StyleID="srow">
+                        <Data ss:Type="String">{!element.bSocial}</Data>
+                    </Cell>
+                </Row>
+                </apex:repeat>
+            </Table>
+        </Worksheet>
+    </Workbook>
+</apex:page>
